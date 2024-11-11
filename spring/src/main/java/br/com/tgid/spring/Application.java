@@ -10,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
-import java.util.List;
 
 @RequiredArgsConstructor
 @SpringBootApplication
@@ -54,7 +53,6 @@ public class Application implements CommandLineRunner {
 
         // Salvando os produtos, que já estão associados às categorias
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
-
 
     }
 }
