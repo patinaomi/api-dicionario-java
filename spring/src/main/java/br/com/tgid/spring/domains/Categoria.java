@@ -23,10 +23,8 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "T_Categoria")
 public class Categoria implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
