@@ -1,4 +1,4 @@
-package br.com.tgid.spring.resources;
+package br.com.tgid.spring.gateways.resources;
 
 import br.com.tgid.spring.domains.Categoria;
 import br.com.tgid.spring.service.CategoriaService;

@@ -1,5 +1,6 @@
-package br.com.tgid.spring.resources;
+package br.com.tgid.spring.gateways.resources.exception;
 
+import br.com.tgid.spring.gateways.dto.StandardError;
 import br.com.tgid.spring.service.exception.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

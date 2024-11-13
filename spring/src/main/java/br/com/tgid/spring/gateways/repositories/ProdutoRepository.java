@@ -1,4 +1,4 @@
-package br.com.tgid.spring.repositories;
+package br.com.tgid.spring.gateways.repositories;
 
 import br.com.tgid.spring.domains.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package br.com.tgid.spring.resources;
+package br.com.tgid.spring.gateways.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

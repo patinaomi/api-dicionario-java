@@ -1,7 +1,7 @@
 package br.com.tgid.spring.service.impl;
 
 import br.com.tgid.spring.domains.Categoria;
-import br.com.tgid.spring.repositories.CategoriaRepository;
+import br.com.tgid.spring.gateways.resources.repositories.CategoriaRepository;
 import br.com.tgid.spring.service.CategoriaService;
 import br.com.tgid.spring.service.exception.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;

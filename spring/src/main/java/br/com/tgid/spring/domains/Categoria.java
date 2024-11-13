@@ -37,6 +37,7 @@ public class Categoria {
 
     @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
+    @ToString.Exclude
     private List<Produto> produtos = new ArrayList<>();
 
     public Categoria(Integer id, String nome) {

@@ -1,4 +1,4 @@
-package br.com.tgid.spring.repositories;
+package br.com.tgid.spring.gateways.repositories;
 
 import br.com.tgid.spring.domains.Cliente;
 import br.com.tgid.spring.domains.Endereco;
