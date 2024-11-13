@@ -1,8 +1,12 @@
 package br.com.tgid.spring;
 
 import br.com.tgid.spring.domains.Categoria;
+import br.com.tgid.spring.domains.Cidade;
+import br.com.tgid.spring.domains.Estado;
 import br.com.tgid.spring.domains.Produto;
 import br.com.tgid.spring.repositories.CategoriaRepository;
+import br.com.tgid.spring.repositories.CidadeRepository;
+import br.com.tgid.spring.repositories.EstadoRespository;
 import br.com.tgid.spring.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +21,8 @@ public class Application implements CommandLineRunner {
 
     private final CategoriaRepository categoriaRepository;
     private final ProdutoRepository produtoRepository;
+    private final EstadoRespository estadoRespository;
+    private final CidadeRepository cidadeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -53,6 +59,21 @@ public class Application implements CommandLineRunner {
 
         // Salvando os produtos, que já estão associados às categorias
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        // Criando os estados
+        Estado est1 = new Estado(null, "Minas Gerais");
+        Estado est2 = new Estado(null, "São Paulo");
+
+        // Criando as cidades
+        Cidade c1 = new Cidade(null, "Uberlândia", est1);
+        Cidade c2 = new Cidade(null, "São Paulo", est2);
+        Cidade c3 = new Cidade(null, "Campinas", est2);
+
+        est1.getCidades().add(c1);
+        est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+        estadoRespository.saveAll(Arrays.asList(est1, est2));
+        cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
     }
 }
