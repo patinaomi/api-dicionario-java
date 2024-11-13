@@ -7,32 +7,38 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
-@Table(name = "cidade")
-public class Cidade {
+@Table(name = "endereco")
+public class Endereco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(length = 60, nullable = false)
-    private String nome;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String bairro;
+    private String cep;
 
     @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private Estado estado;
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
+    private Cidade cidade;
 
 }
