@@ -1,5 +1,6 @@
 package br.com.tgid.spring.domains;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,18 +8,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@AllArgsConstructor
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-public class Endereco {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,18 +31,23 @@ public class Endereco {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    private String logradouro;
-    private String numero;
-    private String complemento;
-    private String bairro;
-    private String cep;
+    private LocalDateTime instante;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private Pagamento pagamento;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "cidade_id")
-    private Cidade cidade;
+    @JoinColumn(name = "endereco_de_entrega_id")
+    private Endereco enderecoDeEntrega;
 
+    public Pedido(Integer id, LocalDateTime instante, Cliente cliente, Endereco enderecoDeEntrega) {
+        this.id = id;
+        this.instante = instante;
+        this.cliente = cliente;
+        this.enderecoDeEntrega = enderecoDeEntrega;
+    }
 }

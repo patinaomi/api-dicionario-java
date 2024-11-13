@@ -5,18 +5,29 @@ import br.com.tgid.spring.domains.Cidade;
 import br.com.tgid.spring.domains.Cliente;
 import br.com.tgid.spring.domains.Endereco;
 import br.com.tgid.spring.domains.Estado;
+import br.com.tgid.spring.domains.Pagamento;
+import br.com.tgid.spring.domains.PagamentoComBoleto;
+import br.com.tgid.spring.domains.PagamentoComCartao;
+import br.com.tgid.spring.domains.Pedido;
 import br.com.tgid.spring.domains.Produto;
+import br.com.tgid.spring.domains.enums.EstadoPagamento;
 import br.com.tgid.spring.domains.enums.TipoCliente;
-import br.com.tgid.spring.gateways.resources.repositories.CategoriaRepository;
+import br.com.tgid.spring.gateways.repositories.CategoriaRepository;
 import br.com.tgid.spring.gateways.repositories.CidadeRepository;
+import br.com.tgid.spring.gateways.repositories.ClienteRepository;
 import br.com.tgid.spring.gateways.repositories.EnderecoRepository;
 import br.com.tgid.spring.gateways.repositories.EstadoRespository;
+import br.com.tgid.spring.gateways.repositories.PagamentoRepository;
+import br.com.tgid.spring.gateways.repositories.PedidoRepository;
 import br.com.tgid.spring.gateways.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
@@ -29,6 +40,8 @@ public class Application implements CommandLineRunner {
     private final CidadeRepository cidadeRepository;
     private final ClienteRepository clienteRepository;
     private final EnderecoRepository enderecoRepository;
+    private final PedidoRepository pedidoRepository;
+    private final PagamentoRepository pagamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -92,5 +105,17 @@ public class Application implements CommandLineRunner {
         clienteRepository.saveAll(Arrays.asList(cli1));
         enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
+        Pedido ped1 = new Pedido(null, LocalDateTime.of(2017, 9, 30, 15, 30, 0), cli1, e1);
+        Pedido ped2 = new Pedido(null, LocalDateTime.of(2017, 10, 10, 19, 35, 0), cli1, e2);
+
+        Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+        ped1.setPagamento(pagto1);
+
+        Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, LocalDate.of(2017, 10, 20), null);
+        ped2.setPagamento(pagto2);
+
+        cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+        pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+        pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
     }
 }

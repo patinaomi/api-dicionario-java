@@ -22,11 +22,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "cliente")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Column(nullable = false)
     private Integer id;
@@ -38,6 +37,9 @@ public class Cliente {
     private String cpfOuCnpj;
 
     private Integer tipo;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
