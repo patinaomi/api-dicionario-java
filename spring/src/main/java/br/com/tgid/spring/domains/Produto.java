@@ -19,8 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @NoArgsConstructor
 @Getter
 @Setter
@@ -42,7 +40,6 @@ public class Produto {
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
-    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))

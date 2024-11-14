@@ -15,13 +15,10 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Categoria {
 
@@ -34,7 +31,6 @@ public class Categoria {
     @Column(length = 80, nullable = false)
     private String nome;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     @ToString.Exclude
     private List<Produto> produtos = new ArrayList<>();
