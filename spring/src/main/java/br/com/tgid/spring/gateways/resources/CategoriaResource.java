@@ -1,7 +1,10 @@
 package br.com.tgid.spring.gateways.resources;
 
 import br.com.tgid.spring.domains.Categoria;
+import br.com.tgid.spring.gateways.request.CategoriaRequest;
+import br.com.tgid.spring.gateways.response.CategoriaResponse;
 import br.com.tgid.spring.service.CategoriaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +25,24 @@ public class CategoriaResource {
     private final CategoriaService service;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@Valid @RequestBody CategoriaRequest categoria) {
-        Categoria categoriaCreated = service.create(categoria);
-        return ResponseEntity.ok().body(categoriaCreated);
+    public ResponseEntity<CategoriaResponse> create(@Valid @RequestBody CategoriaRequest categoriaRequest) {
+        // Converte CategoriaRequest para Categoria
+        Categoria categoriaEntity = new Categoria();
+        categoriaEntity.setNome(categoriaRequest.getNome());
+        // Defina os outros campos conforme necessário
+
+        // Cria a categoria e salva no banco
+        Categoria categoriaCreated = service.create(categoriaEntity);
+
+        // Converte Categoria para CategoriaResponse
+        CategoriaResponse categoriaResponse = new CategoriaResponse(
+                categoriaCreated.getId(),
+                categoriaCreated.getNome()
+        );
+
+        return ResponseEntity.ok().body(categoriaResponse);
     }
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
