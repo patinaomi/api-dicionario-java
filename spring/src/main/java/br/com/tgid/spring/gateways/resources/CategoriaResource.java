@@ -19,21 +19,9 @@ public class CategoriaResource {
 
     private final CategoriaService service;
 
-    @GetMapping
-    public List listar() {
-        Categoria cat1 = new Categoria(1, "Informática");
-        Categoria cat2 = new Categoria(2, "Escritório");
-
-        List<Categoria> categorias = new ArrayList<>();
-        categorias.add(cat1);
-        categorias.add(cat2);
-
-        return categorias;
-    }
-
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> buscar(@PathVariable Integer id) {
-        Categoria categoria = service.buscar(id);
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        Categoria categoria = service.findById(id);
         return ResponseEntity.ok().body(categoria);
     }
 }

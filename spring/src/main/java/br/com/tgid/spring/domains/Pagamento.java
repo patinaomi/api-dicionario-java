@@ -12,17 +12,19 @@ import jakarta.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+// em JPA é usada para definir uma estratégia de herança entre classes de entidades no banco de dados.
 public abstract class Pagamento {
 
     @Id
-    @EqualsAndHashCode.Include
     @Column(nullable = false)
     private Integer id;
 

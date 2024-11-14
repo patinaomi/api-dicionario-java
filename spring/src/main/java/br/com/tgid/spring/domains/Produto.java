@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Produto {
 
