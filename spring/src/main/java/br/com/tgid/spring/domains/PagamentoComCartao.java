@@ -2,11 +2,14 @@ package br.com.tgid.spring.domains;
 
 import br.com.tgid.spring.domains.enums.EstadoPagamento;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.Entity;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class PagamentoComCartao extends Pagamento{

@@ -4,5 +4,5 @@ import br.com.tgid.spring.domains.Cliente;
 
 public interface ClienteService {
 
-    Cliente buscar(Integer id);
+    Cliente findById(Integer id);
 }

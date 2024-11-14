@@ -10,12 +10,10 @@ import jakarta.persistence.Entity;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class ItemPedido {
 
-    @EqualsAndHashCode.Include
-    @EmbeddedId
+    @EmbeddedId // Usado pra definir uma chave composta
     private ItemPedidoPK id = new ItemPedidoPK();
 
     private Double desconto;

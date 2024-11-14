@@ -1,7 +1,9 @@
 package br.com.tgid.spring.gateways.resources;
 
 import br.com.tgid.spring.domains.Categoria;
+
 import br.com.tgid.spring.gateways.mapper.CategoriaMapper;
+
 import br.com.tgid.spring.gateways.request.CategoriaRequest;
 import br.com.tgid.spring.gateways.response.CategoriaResponse;
 import br.com.tgid.spring.service.CategoriaService;
@@ -25,23 +27,23 @@ public class CategoriaResource {
     private final CategoriaService service;
     private final CategoriaMapper categoriaMapper;
 
-    @PostMapping("/criar")
-    public ResponseEntity<?> criar(@Valid @RequestBody CategoriaRequest request) {
-        try {
-            Categoria categoria = categoriaMapper.map(request); // Converte CategoriaRequest para Categoria
-            Categoria categoriaSalva = service.criar(categoria);
-            CategoriaResponse categoriaResponse = categoriaMapper.map(categoriaSalva); // Converte Categoria para CategoriaResponse
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(categoriaResponse);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar a clínica: " + e.getMessage());
-        }
+    @PostMapping("/create")
+    public ResponseEntity<CategoriaResponse> create(@Valid @RequestBody CategoriaRequest categoriaRequest) {
+        // Converte CategoriaRequest para Categoria
+        Categoria categoriaEntity = new Categoria();
+        categoriaEntity.setNome(categoriaRequest.getNome());
+        // Defina os outros campos conforme necessário
+
+        // Cria a categoria e salva no banco
+        Categoria categoriaCreated = service.create(categoriaEntity);
+
+        // Converte Categoria para CategoriaResponse
+        CategoriaResponse categoriaResponse = new CategoriaResponse(
+                categoriaCreated.getId(),
+                categoriaCreated.getNome()
+        );
+
+        return ResponseEntity.ok().body(categoriaResponse);
     }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<?> buscar(@PathVariable Integer id) {
-        Categoria categoria = service.buscarPorId(id);
-        return ResponseEntity.ok().body(categoria);
-    }
-
 }
