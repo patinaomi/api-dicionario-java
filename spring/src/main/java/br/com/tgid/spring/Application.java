@@ -23,6 +23,7 @@ import br.com.tgid.spring.gateways.repositories.PagamentoRepository;
 import br.com.tgid.spring.gateways.repositories.PedidoRepository;
 import br.com.tgid.spring.gateways.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,19 +33,27 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-@RequiredArgsConstructor
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    private final CategoriaRepository categoriaRepository;
-    private final ProdutoRepository produtoRepository;
-    private final EstadoRespository estadoRespository;
-    private final CidadeRepository cidadeRepository;
-    private final ClienteRepository clienteRepository;
-    private final EnderecoRepository enderecoRepository;
-    private final PedidoRepository pedidoRepository;
-    private final PagamentoRepository pagamentoRepository;
-    private final ItemPedidoRepository itemPedidoRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
+    @Autowired
+    private EstadoRespository estadoRespository;
+    @Autowired
+    private CidadeRepository cidadeRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

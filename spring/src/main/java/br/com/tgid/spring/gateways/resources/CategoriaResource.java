@@ -1,16 +1,12 @@
 package br.com.tgid.spring.gateways.resources;
 
 import br.com.tgid.spring.domains.Categoria;
-
-import br.com.tgid.spring.gateways.mapper.CategoriaMapper;
-
 import br.com.tgid.spring.gateways.request.CategoriaRequest;
 import br.com.tgid.spring.gateways.response.CategoriaResponse;
 import br.com.tgid.spring.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-    private final CategoriaService service;
-    private final CategoriaMapper categoriaMapper;
-
+    @Autowired
+    private CategoriaService service;
 
     @PostMapping("/create")
     public ResponseEntity<CategoriaResponse> create(@Valid @RequestBody CategoriaRequest categoriaRequest) {
@@ -45,5 +39,12 @@ public class CategoriaResource {
         );
 
         return ResponseEntity.ok().body(categoriaResponse);
+    }
+
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        Categoria categoria = service.findById(id);
+        return ResponseEntity.ok().body(categoria);
     }
 }
