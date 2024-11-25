@@ -6,6 +6,7 @@ import br.com.tgid.spring.gateways.response.CategoriaResponse;
 import br.com.tgid.spring.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-    private final CategoriaService service;
+    @Autowired
+    private CategoriaService service;
 
     @PostMapping("/create")
     public ResponseEntity<CategoriaResponse> create(@Valid @RequestBody CategoriaRequest categoriaRequest) {

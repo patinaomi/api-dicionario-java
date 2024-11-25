@@ -14,18 +14,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@NoArgsConstructor
-@Getter
-@Setter
 @Entity
-public class Produto {
+public class Produto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,13 +46,56 @@ public class Produto {
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-
     private List<Categoria> categorias = new ArrayList<>();
+
+    public Produto() {
+
+    }
 
     public Produto(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     // Pra cada item de pedido x, adiciona o pedido de x na lista de pedidos
@@ -63,4 +107,20 @@ public class Produto {
         return lista;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (object == null)
+            return false;
+        if(getClass() != object.getClass())
+            return false;
+        Produto other = (Produto) object;
+        return Objects.equals(id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
