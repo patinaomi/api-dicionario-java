@@ -9,10 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -113,7 +109,7 @@ public class Produto implements Serializable {
             return true;
         if (object == null)
             return false;
-        if(getClass() != object.getClass())
+        if (getClass() != object.getClass())
             return false;
         Produto other = (Produto) object;
         return Objects.equals(id, other.id);

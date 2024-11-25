@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(length = 80, nullable = false)
@@ -30,7 +29,6 @@ public class Categoria implements Serializable {
 
     @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
-    @ToString.Exclude
     private List<Produto> produtos = new ArrayList<>();
 
     // construtores
@@ -82,7 +80,7 @@ public class Categoria implements Serializable {
             return true;
         if (object == null)
             return false;
-        if(getClass() != object.getClass())
+        if (getClass() != object.getClass())
             return false;
         Categoria other = (Categoria) object;
         return Objects.equals(id, other.id);

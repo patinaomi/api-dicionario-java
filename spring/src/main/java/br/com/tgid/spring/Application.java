@@ -22,13 +22,11 @@ import br.com.tgid.spring.gateways.repositories.ItemPedidoRepository;
 import br.com.tgid.spring.gateways.repositories.PagamentoRepository;
 import br.com.tgid.spring.gateways.repositories.PedidoRepository;
 import br.com.tgid.spring.gateways.repositories.ProdutoRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;

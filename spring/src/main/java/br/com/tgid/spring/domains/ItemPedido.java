@@ -1,15 +1,8 @@
 package br.com.tgid.spring.domains;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
-@Data
-@NoArgsConstructor
 @Entity
 public class ItemPedido {
 
@@ -19,6 +12,10 @@ public class ItemPedido {
     private Double desconto;
     private Integer quantidade;
     private Double preco;
+
+    public ItemPedido() {
+
+    }
 
     public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
         id.setPedido(pedido);
@@ -35,5 +32,37 @@ public class ItemPedido {
 
     public Produto getProduto() {
         return id.getProduto();
+    }
+
+    public ItemPedidoPK getId() {
+        return id;
+    }
+
+    public void setId(ItemPedidoPK id) {
+        this.id = id;
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 }

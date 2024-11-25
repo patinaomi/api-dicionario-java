@@ -3,14 +3,8 @@ package br.com.tgid.spring.domains;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @Embeddable
-@Getter
-@Setter
 public class ItemPedidoPK {
 
     @ManyToOne
@@ -20,4 +14,20 @@ public class ItemPedidoPK {
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 }

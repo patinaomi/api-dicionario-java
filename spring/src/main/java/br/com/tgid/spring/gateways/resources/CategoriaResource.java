@@ -5,7 +5,6 @@ import br.com.tgid.spring.gateways.request.CategoriaRequest;
 import br.com.tgid.spring.gateways.response.CategoriaResponse;
 import br.com.tgid.spring.service.CategoriaService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
