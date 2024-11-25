@@ -10,10 +10,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 // em JPA é usada para definir uma estratégia de herança entre classes de entidades no banco de dados.
-public abstract class Pagamento {
+public abstract class Pagamento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(nullable = false)
@@ -21,6 +28,7 @@ public abstract class Pagamento {
 
     private Integer estado;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
@@ -62,5 +70,18 @@ public abstract class Pagamento {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pagamento pagamento = (Pagamento) o;
+        return Objects.equals(id, pagamento.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

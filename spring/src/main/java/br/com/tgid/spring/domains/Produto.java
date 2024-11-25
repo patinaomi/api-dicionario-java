@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
@@ -35,6 +36,7 @@ public class Produto implements Serializable {
     @Column(nullable = false)
     private Double preco;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
@@ -95,6 +97,7 @@ public class Produto implements Serializable {
     }
 
     // Pra cada item de pedido x, adiciona o pedido de x na lista de pedidos
+    @JsonIgnore
     public List<Pedido> getPedidos() {
         List<Pedido> lista = new ArrayList<>();
         for (ItemPedido x : itens) {

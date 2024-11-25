@@ -3,9 +3,17 @@ package br.com.tgid.spring.domains;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
-@Entity
-public class ItemPedido {
+import java.io.Serializable;
+import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class ItemPedido implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @JsonIgnore
     @EmbeddedId // Usado pra definir uma chave composta
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -26,6 +34,7 @@ public class ItemPedido {
     }
 
     // Para ter acesso direto ao Pedido e Produto
+    @JsonIgnore
     public Pedido getPedido() {
         return id.getPedido();
     }
@@ -64,5 +73,18 @@ public class ItemPedido {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemPedido that = (ItemPedido) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

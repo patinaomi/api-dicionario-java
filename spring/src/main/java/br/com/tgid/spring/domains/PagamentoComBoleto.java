@@ -5,10 +5,17 @@ import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class PagamentoComBoleto extends Pagamento {
 
+    private static final long serialVersionUID = 1L;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVencimento;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamento;
 
     public PagamentoComBoleto() {
