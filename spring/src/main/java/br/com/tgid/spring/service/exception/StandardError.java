@@ -1,4 +1,4 @@
-package br.com.tgid.spring.gateways.dtos.response;
+package br.com.tgid.spring.service.exception;
 
 import java.io.Serializable;
 

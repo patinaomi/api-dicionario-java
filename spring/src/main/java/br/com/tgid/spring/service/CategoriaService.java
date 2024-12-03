@@ -4,7 +4,11 @@ import br.com.tgid.spring.domains.Categoria;
 import br.com.tgid.spring.gateways.repositories.CategoriaRepository;
 import br.com.tgid.spring.service.exception.DataIntegrityException;
 import br.com.tgid.spring.service.exception.ObjectNotFoundException;
+import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +47,10 @@ public class CategoriaService {
         } else {
             throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos associados");
         }
+    }
+
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repository.findAll(pageRequest);
     }
 }
