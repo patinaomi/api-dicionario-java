@@ -1,6 +1,6 @@
 package br.com.tgid.spring.exception;
 
-import br.com.tgid.spring.gateways.response.StandardError;
+import br.com.tgid.spring.gateways.dtos.response.StandardError;
 import br.com.tgid.spring.service.exception.DataIntegrityException;
 import br.com.tgid.spring.service.exception.ObjectNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

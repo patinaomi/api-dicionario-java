@@ -1,4 +1,4 @@
-package br.com.tgid.spring.gateways.request;
+package br.com.tgid.spring.gateways.dtos.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

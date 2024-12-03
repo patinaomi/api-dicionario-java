@@ -1,12 +1,13 @@
 package br.com.tgid.spring.gateways.resources;
 
 import br.com.tgid.spring.domains.Categoria;
-import br.com.tgid.spring.gateways.request.CategoriaRequest;
-import br.com.tgid.spring.gateways.response.CategoriaResponse;
+import br.com.tgid.spring.gateways.dtos.request.CategoriaRequest;
+import br.com.tgid.spring.gateways.dtos.response.CategoriaResponse;
 import br.com.tgid.spring.service.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class CategoriaResource {
     private CategoriaService service;
 
     @PostMapping("/create")
-    public ResponseEntity<CategoriaResponse> create(@Valid @RequestBody CategoriaRequest categoriaRequest) {
+    public ResponseEntity<CategoriaResponse> insert(@Valid @RequestBody CategoriaRequest categoriaRequest) {
         // Converte CategoriaRequest para Categoria
         Categoria categoriaEntity = new Categoria();
         categoriaEntity.setNome(categoriaRequest.getNome());
@@ -45,5 +46,11 @@ public class CategoriaResource {
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         Categoria categoria = service.findById(id);
         return ResponseEntity.ok().body(categoria);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

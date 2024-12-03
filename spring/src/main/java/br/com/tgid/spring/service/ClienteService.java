@@ -12,6 +12,10 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
+    public ClienteService(ClienteRepository repository) {
+        this.repository = repository;
+    }
+
     public Cliente findById(Integer id) {
         return repository.findById(id) // Um Optional ajuda a evitar NullPointerException
                 .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

@@ -1,4 +1,4 @@
-package br.com.tgid.spring.gateways.response;
+package br.com.tgid.spring.gateways.dtos.response;
 
 public record CategoriaResponse(Integer id, String nome) {
 }
