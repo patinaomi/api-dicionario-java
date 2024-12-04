@@ -1,6 +1,8 @@
 package br.com.tgid.spring.domains;
 
 import br.com.tgid.spring.domains.enums.TipoCliente;
+import br.com.tgid.spring.gateways.dtos.ClienteDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -41,7 +43,8 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cliente")
+    // toda operação que modificar um cliente, modificará os endereços
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
@@ -56,7 +59,10 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getCod();
+        this.tipo = (tipo == null) ? null : tipo.getCod();
+    }
+
+    public Cliente(Integer id, String nome, String email) {
     }
 
     public TipoCliente getTipo() {

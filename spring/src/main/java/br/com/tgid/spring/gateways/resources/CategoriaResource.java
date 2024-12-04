@@ -34,7 +34,7 @@ public class CategoriaResource {
         categoriaEntity.setNome(categoriaDTO.getNome());
 
         // Cria a categoria e salva no banco
-        Categoria categoriaCreated = service.create(categoriaEntity);
+        Categoria categoriaCreated = service.insert(categoriaEntity);
 
         return ResponseEntity.ok().body(categoriaCreated);
     }

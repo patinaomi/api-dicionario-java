@@ -4,7 +4,6 @@ import br.com.tgid.spring.domains.Categoria;
 import br.com.tgid.spring.gateways.repositories.CategoriaRepository;
 import br.com.tgid.spring.service.exception.DataIntegrityException;
 import br.com.tgid.spring.service.exception.ObjectNotFoundException;
-import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +18,7 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository repository;
 
-    public Categoria create(Categoria categoria) {
+    public Categoria insert(Categoria categoria) {
         return repository.save(categoria);
     }
 
