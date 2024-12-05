@@ -1,5 +1,9 @@
 package br.com.tgid.spring.domains;
 
+import br.com.tgid.spring.domains.Cliente;
+import br.com.tgid.spring.domains.Endereco;
+import br.com.tgid.spring.domains.ItemPedido;
+import br.com.tgid.spring.domains.Pagamento;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,12 +60,7 @@ public class Pedido implements Serializable {
     }
 
     public Double getValorTotal() {
-        double soma = 0.0;
-        for (ItemPedido itemPedido : itens) {
-            soma += itemPedido.getSubTotal();
-        }
-        return soma;
-        //    return itens.stream().mapToDouble(ItemPedido::getSubTotal).sum();
+        return itens.stream().mapToDouble(ItemPedido::getSubTotal).sum();
     }
 
     public Integer getId() {
