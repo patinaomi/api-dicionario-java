@@ -1,10 +1,12 @@
 package br.com.tgid.spring.gateways.dtos;
 
 import br.com.tgid.spring.domains.Cliente;
+import br.com.tgid.spring.service.validation.ClienteUpdate;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+@ClienteUpdate
 public class ClienteDTO {
 
     private Integer id;
