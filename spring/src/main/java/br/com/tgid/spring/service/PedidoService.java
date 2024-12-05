@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 public class PedidoService {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoRepository repository;
 
     public Pedido findById(Integer id) {
-        return pedidoRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
     }
 }

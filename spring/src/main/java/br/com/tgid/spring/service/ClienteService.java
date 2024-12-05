@@ -1,10 +1,6 @@
 package br.com.tgid.spring.service;
 
-import br.com.tgid.spring.domains.Cidade;
 import br.com.tgid.spring.domains.Cliente;
-import br.com.tgid.spring.domains.Endereco;
-import br.com.tgid.spring.domains.enums.TipoCliente;
-import br.com.tgid.spring.gateways.dtos.ClienteNewDTO;
 import br.com.tgid.spring.gateways.repositories.CidadeRepository;
 import br.com.tgid.spring.gateways.repositories.ClienteRepository;
 import br.com.tgid.spring.gateways.repositories.EnderecoRepository;
@@ -52,7 +48,7 @@ public class ClienteService {
     }
 
     public Cliente update(Integer id, Cliente cliente) {
-        if(repository.existsById(id)) {
+        if (repository.existsById(id)) {
             cliente.setId(id);
             return repository.save(cliente);
         } else {
@@ -61,7 +57,7 @@ public class ClienteService {
     }
 
     public void delete(Integer id) {
-        if(repository.existsById(id)) {
+        if (repository.existsById(id)) {
             repository.deleteById(id);
         } else {
             throw new DataIntegrityException("Não é possível excluir porque há entidades relacionadas");
