@@ -14,12 +14,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 
 @Entity
 // em JPA é usada para definir uma estratégia de herança entre classes de entidades no banco de dados.
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PagamentoComCartao.class, name = "cartao"),
+        @JsonSubTypes.Type(value = PagamentoComBoleto.class, name = "boleto")
+})
 public abstract class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
